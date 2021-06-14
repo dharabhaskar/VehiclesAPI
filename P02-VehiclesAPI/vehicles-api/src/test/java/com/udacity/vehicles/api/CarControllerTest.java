@@ -96,6 +96,11 @@ public class CarControllerTest {
          *   the whole list of vehicles. This should utilize the car from `getCar()`
          *   below (the vehicle will be the first in the list).
          */
+        createCar();
+        mvc.perform(
+                get(new URI("/cars"))
+        ).andExpect(status().isOk());
+
 
     }
 
@@ -109,6 +114,10 @@ public class CarControllerTest {
          * TODO: Add a test to check that the `get` method works by calling
          *   a vehicle by ID. This should utilize the car from `getCar()` below.
          */
+        createCar();
+        mvc.perform(
+                get(new URI("/cars/1"))
+        ).andExpect(status().isOk());
     }
 
     /**
@@ -122,6 +131,10 @@ public class CarControllerTest {
          *   when the `delete` method is called from the Car Controller. This
          *   should utilize the car from `getCar()` below.
          */
+        createCar();
+        mvc.perform(
+                delete(new URI("/cars/1"))
+        ).andExpect(status().isOk());
     }
 
     /**
@@ -130,6 +143,7 @@ public class CarControllerTest {
      */
     private Car getCar() {
         Car car = new Car();
+        car.setId(null);
         car.setLocation(new Location(40.730610, -73.935242));
         Details details = new Details();
         Manufacturer manufacturer = new Manufacturer(101, "Chevrolet");
@@ -145,6 +159,7 @@ public class CarControllerTest {
         details.setNumberOfDoors(4);
         car.setDetails(details);
         car.setCondition(Condition.USED);
+
         return car;
     }
 }

@@ -1,5 +1,6 @@
 package com.udacity.vehicles.service;
 
+import com.netflix.discovery.converters.Auto;
 import com.udacity.vehicles.client.maps.MapsClient;
 import com.udacity.vehicles.client.prices.PriceClient;
 import com.udacity.vehicles.domain.car.Car;
@@ -7,6 +8,7 @@ import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +20,9 @@ import org.springframework.stereotype.Service;
 public class CarService {
 
     private final CarRepository repository;
+    @Autowired
     private PriceClient priceClient;
+    @Autowired
     private MapsClient mapsClient;
 
     public CarService(CarRepository repository) {
@@ -58,7 +62,9 @@ public class CarService {
          * Note: The car class file uses @transient, meaning you will need to call
          *   the pricing service each time to get the price.
          */
+        System.out.println("Finding car price...");
         car.setPrice(priceClient.getPrice(id));
+        System.out.println(car);
 
 
         /**
@@ -70,6 +76,7 @@ public class CarService {
          * meaning the Maps service needs to be called each time for the address.
          */
         car.setLocation(mapsClient.getAddress(car.getLocation()));
+
 
     
         return car;
