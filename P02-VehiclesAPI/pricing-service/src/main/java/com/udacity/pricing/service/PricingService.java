@@ -46,4 +46,8 @@ public class PricingService {
                 .multiply(new BigDecimal(5000d)).setScale(2, RoundingMode.HALF_UP);
     }
 
+    public int getPrice(){
+        return 1;
+    }
+
 }
