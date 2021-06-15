@@ -134,7 +134,7 @@ public class CarControllerTest {
         createCar();
         mvc.perform(
                 delete(new URI("/cars/1"))
-        ).andExpect(status().isOk());
+        ).andExpect(status().isNoContent());
     }
 
     /**
